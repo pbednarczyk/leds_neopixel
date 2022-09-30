@@ -2,6 +2,7 @@
 # Simple test for NeoPixels on Raspberry Pi
 from neopixel import *
 import time
+import numpy as np
 
 
 # Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
@@ -55,7 +56,8 @@ def rainbow_cycle(wait):
     for j in range(255):
         for i in range(num_pixels):
             pixel_index = (i * 256 // num_pixels) + j
-            strip.setPixelColor(i, Color(wheel(pixel_index & 255).array()))
+            wheel_tup = wheel(pixel_index & 255)
+            strip.setPixelColor(i, Color(np.array(wheel_tup)))
             strip.show()
         time.sleep(wait)
 
