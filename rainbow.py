@@ -2,6 +2,7 @@
 from neopixel import *
 import numpy as np
 import time
+import random
 import logging
 
 LEDCOUNT = 44 # Number of LEDs
@@ -32,6 +33,9 @@ def set_color(color, wait_ms=0):
 
 
 while True:
-    # First LED white
-    set_color(RgbColor(list(np.random.choice(range(256), size=3))),50)
+    r = random.randint(0,255)
+    g = random.randint(0,255)
+    b = random.randint(0,255)
+    
+    set_color(RgbColor(r,g,b),50)
 
