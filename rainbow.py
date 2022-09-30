@@ -55,7 +55,7 @@ def rainbow_cycle(wait):
     for j in range(255):
         for i in range(num_pixels):
             pixel_index = (i * 256 // num_pixels) + j
-            strip.setPixelColor(i, Color(wheel(pixel_index & 255)))
+            strip.setPixelColor(i, Color(wheel(pixel_index & 255).array()))
             strip.show()
         time.sleep(wait)
 
