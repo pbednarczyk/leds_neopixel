@@ -31,3 +31,9 @@ while True:
     strip.setPixelColor(0, Color(0,255,0))
     strip.setPixelColor(1, Color(0,255,0))
     strip.show()
+    time.sleep(0.5)
+    # LEDs Blue
+    strip.setPixelColor(0, Color(0,0,255))
+    strip.setPixelColor(1, Color(0,0,255))
+    strip.show()
+    time.sleep(1)
