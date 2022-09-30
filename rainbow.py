@@ -27,19 +27,19 @@ def set_color(color, wait_ms=0):
         for i in range(strip.numPixels()):
             strip.setPixelColor(i, Color(color.green, color.red, color.blue))
             strip.show()
-            # time.sleep(wait_ms/1000.0)
+            time.sleep(wait_ms/1000.0)
 
 
 while True:
     # First LED white
-    set_color(RgbColor(255,255,255))
+    set_color(RgbColor(255,255,255),1)
     time.sleep(1)
     # LEDs Red
-    set_color(RgbColor(255,0,0))
+    set_color(RgbColor(255,0,0),1)
     time.sleep(1)
     # LEDs Green
-    set_color(RgbColor(0,255,0))
+    set_color(RgbColor(0,255,0),1)
     time.sleep(1)
     # LEDs Blue
-    set_color(RgbColor(0,0,255))
+    set_color(RgbColor(0,0,255),1)
     time.sleep(1)
