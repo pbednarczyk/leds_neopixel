@@ -1,24 +1,31 @@
 
 # Simple test for NeoPixels on Raspberry Pi
+from neopixel import *
 import time
-import board
-import neopixel
 
 
 # Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
 # NeoPixels must be connected to D10, D12, D18 or D21 to work.
-pixel_pin = board.D18
+pixel_pin = 18
 
 # The number of NeoPixels
 num_pixels = 44
 
+LED_FREQ_HZ = 800000
+LED_DMA        = 10      # DMA channel to use for generating signal (try 10)
+LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
+LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
+LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
+
 # The order of the pixel colors - RGB or GRB. Some NeoPixels have red and green reversed!
 # For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
-ORDER = neopixel.RGB
+# ORDER = neopixel.RGB
+# 
+# pixels = neopixel.NeoPixel(
+# # pixel_pin, num_pixels, brightness=1, auto_write=False, pixel_order=ORDER
+# )
 
-pixels = neopixel.NeoPixel(
-    pixel_pin, num_pixels, brightness=1, auto_write=False, pixel_order=ORDER
-)
+strip = Adafruit_NeoPixel(num_pixels, num_pixels, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
 
 
 def wheel(pos):
@@ -40,15 +47,16 @@ def wheel(pos):
         r = 0
         g = int(pos * 3)
         b = int(255 - pos * 3)
-    return (r, g, b) if ORDER in (neopixel.RGB, neopixel.GRB) else (r, g, b, 0)
+
+    return (r, g, b)
 
 
 def rainbow_cycle(wait):
     for j in range(255):
         for i in range(num_pixels):
             pixel_index = (i * 256 // num_pixels) + j
-            pixels[i] = wheel(pixel_index & 255)
-        pixels.show()
+            strip.setPixelColor(i, Color(wheel(pixel_index & 255)))
+            strip.show()
         time.sleep(wait)
 
 
