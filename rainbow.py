@@ -26,6 +26,15 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 # # pixel_pin, num_pixels, brightness=1, auto_write=False, pixel_order=ORDER
 # )
 
+class RgbColor:
+    def __init__(self, red, green, blue):
+        self.red = red
+        self.green = green
+        self.blue = blue
+
+    def __eq__(self, other):
+        return self.red == other.red and self.green == other.green and self.blue == other.blue
+
 strip = Adafruit_NeoPixel(num_pixels, num_pixels, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
 
 
@@ -49,15 +58,15 @@ def wheel(pos):
         g = int(pos * 3)
         b = int(255 - pos * 3)
 
-    return (r, g, b)
+    return RgbColor(r, g, b)
 
 
 def rainbow_cycle(wait):
     for j in range(255):
         for i in range(num_pixels):
             pixel_index = (i * 256 // num_pixels) + j
-            wheel_tup = wheel(pixel_index & 255)
-            strip.setPixelColor(i, Color(np.array(wheel_tup)))
+            color = wheel(pixel_index & 255)
+            strip.setPixelColor(i, Color(color.red, color.green, color.blue))
             strip.show()
         time.sleep(wait)
 
