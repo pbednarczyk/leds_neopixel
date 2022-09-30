@@ -37,14 +37,14 @@ def set_color(self, color, wait_ms=0):
 
 while True:
     # First LED white
-    set_color(RgbColor(255,255,255))
+    set_color(strip, RgbColor(255,255,255))
     time.sleep(1)
     # LEDs Red
-    set_color(RgbColor(255,0,0))
+    set_color(strip, RgbColor(255,0,0))
     time.sleep(1)
     # LEDs Green
-    set_color(RgbColor(0,255,0))
+    set_color(strip, RgbColor(0,255,0))
     time.sleep(1)
     # LEDs Blue
-    set_color(RgbColor(0,0,255))
+    set_color(strip, RgbColor(0,0,255))
     time.sleep(1)
