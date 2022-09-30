@@ -22,19 +22,12 @@ class RgbColor:
     def __eq__(self, other):
         return self.red == other.red and self.green == other.green and self.blue == other.blue
 
-current_color = RgbColor(0, 0, 0)
 
 def set_color(color, wait_ms=0):
-        """Wipe color across display a pixel at a time."""
-        if current_color == color:
-            # No change
-            return
-        logging.info('Changing LED strip color to (%u,%u,%u)' % (color.red, color.green, color.blue))
         for i in range(strip.numPixels()):
             strip.setPixelColor(i, Color(color.green, color.red, color.blue))
             strip.show()
             # time.sleep(wait_ms/1000.0)
-        current_color = color
 
 
 while True:
