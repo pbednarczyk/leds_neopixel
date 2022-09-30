@@ -13,8 +13,6 @@ strip = Adafruit_NeoPixel(LEDCOUNT, GPIOPIN, FREQ, DMA, INVERT, BRIGHTNESS)
 # Intialize the library (must be called once before other functions).
 strip.begin()
 
-current_color = RgbColor(0, 0, 0)
-
 class RgbColor:
     def __init__(self, red, green, blue):
         self.red = red
@@ -23,6 +21,8 @@ class RgbColor:
 
     def __eq__(self, other):
         return self.red == other.red and self.green == other.green and self.blue == other.blue
+
+current_color = RgbColor(0, 0, 0)
 
 def set_color(color, wait_ms=0):
         """Wipe color across display a pixel at a time."""
